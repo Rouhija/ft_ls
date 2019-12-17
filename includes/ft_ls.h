@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 13:07:26 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:30:10 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,16 +80,15 @@ typedef struct		s_ls
 	short			flags;
 	char			*dirname;
 	int				objs;
-	t_btree			*btree;
 }					t_ls;
 
 /*
 ** -------- FUNCTIONS --------
 */
 
-void				object_del(t_obj *obj, t_ls **ls);
-void				print_obj_long(t_obj *obj, t_ls **ls);
-void				print_obj_short(t_obj *obj, t_ls **ls);
+void				object_del(t_obj **head, t_ls **ls);
+void				print_obj_long(t_obj **head, t_ls **ls);
+void				print_obj_short(t_obj **head, t_ls **ls);
 void				exit_program(int reason);
 void				ft_ls(t_ls **ls);
 void				read_dir_rev(t_ls **ls, t_btree **btree, char *dirname);
@@ -112,8 +111,11 @@ void				btree_apply_infix(t_btree *root, t_ls **ls, void (*applyf)(t_obj *, t_ls
 void				btree_apply_infix_rev(t_btree *root, t_ls **ls, void (*applyf)(t_obj *, t_ls **));
 
 void			read_dir(t_ls **ls, t_obj **head, char *dirname);
+void			read_dir_a(t_ls **ls, t_obj **head, char *dirname);
 void	addlst(t_obj **alst, t_obj *new);
-void	objiter(t_obj *lst, t_ls **ls, void (*applyf)(t_obj *, t_ls **));
+void	objiter(t_obj **lst, t_ls **ls, void (*applyf)(t_obj **, t_ls **));
 char    *lst_search(t_obj *lst, int i, int index);
+void			recurse_dirs(t_ls **ls, char *dirname);
+void			merge_sort(t_obj **headref);
 
 #endif

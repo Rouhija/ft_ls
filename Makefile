@@ -20,7 +20,9 @@ FILES 	=	main.c \
 			utils.c \
 			object.c \
 			directory.c \
-			lst.c
+			lst.c \
+			sort.c \
+			recurse.c
 
 SRCS 	=	$(addprefix srcs/, $(FILES))
 OBJS 	=	$(FILES:.c=.o)

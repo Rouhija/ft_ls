@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 13:03:15 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:17:12 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,11 @@ static int		get_padding(t_ls **ls, int ws_col)
 **		Print ls -l format
 */
 
-void			print_obj_long(t_obj *obj, t_ls **ls)
+void			print_obj_long(t_obj **head, t_ls **ls)
 {
+	t_obj			*obj;
+
+	obj = *head;
 	ft_printf("%-10s %d %-7s %.4s %6zu %.12s %s\n", 
 		obj->rights,
 		obj->st_nlink, // check length!!
@@ -52,14 +55,16 @@ void			print_obj_long(t_obj *obj, t_ls **ls)
 **		Print with columnar format
 */
 
-void			print_obj_short(t_obj *obj, t_ls **ls)
+void			print_obj_short(t_obj **head, t_ls **ls)
 {
 	struct winsize	w;
 	static int		i;
 	// int				cols;
 	// int				rows;
 	int				padding;
+	t_obj			*obj;
 
+	obj = *head;
 	ioctl(1, TIOCGSIZE, &w);
 	// padding = get_padding(ls, w.ws_col);
 	// cols = w.ws_col / padding;
@@ -83,16 +88,20 @@ void			print_obj_short(t_obj *obj, t_ls **ls)
 ** 		Delete and free object
 */
 
-void		object_del(t_obj *obj, t_ls **ls)
+void		object_del(t_obj **head, t_ls **ls)
 {
+	t_obj *obj;
+
+	obj = *head;
 	if (obj)
 	{
-		free(obj->path);
-		free(obj->name);
-		free(obj->rights);
-		free(obj->st_uid);
-		free(obj->dt);
+		ft_strdel(&obj->path);
+		ft_strdel(&obj->name);
+		ft_strdel(&obj->rights);
+		ft_strdel(&obj->st_uid);
+		ft_strdel(&obj->dt);
 		free(obj);
+		obj = NULL;
 	}
 	if (ls && *ls)
 	{

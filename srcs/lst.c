@@ -6,20 +6,23 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 12:56:20 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 13:09:11 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:34:50 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void	objiter(t_obj *lst, t_ls **ls, void (*applyf)(t_obj *, t_ls **))
+void	objiter(t_obj **lst, t_ls **ls, void (*applyf)(t_obj **, t_ls **))
 {
-	if (lst)
+    t_obj   *tmp;
+
+    tmp = *lst;
+	if (tmp)
 	{
-		while (lst)
+		while (tmp)
 		{
-			applyf(lst, ls);
-			lst = lst->next;
+			applyf(&tmp, ls);
+			tmp = tmp->next;
 		}
 	}
 }
@@ -41,15 +44,12 @@ char    *lst_search(t_obj *lst, int i, int index)
 	{
 		while (lst)
 		{
-			if (lst->rights[0] == 'd' && lst->name[0] != '.')
+			if (lst->rights[0] == 'd' && ft_strcmp(lst->name, ".") && ft_strcmp(lst->name, ".."))
             {
                 i++;
                 // ft_printf("current %d, index %d\n", i, index);
                 if (i == index)
-                {
-                    // ft_putendl(lst->path);
-                    return (ft_strdup(lst->path));
-                }               
+                    return (ft_strdup(lst->path));           
             }
 			lst = lst->next;
 		}

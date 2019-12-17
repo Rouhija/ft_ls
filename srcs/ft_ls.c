@@ -6,47 +6,38 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:29:34 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 13:09:01 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:33:26 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
-void			recurse_dirs(t_ls **ls, char *dirname)
-{
-	char					*next;
-	t_obj					*head;
-	int						index;
-
-	(*ls)->width = 0;
-	(*ls)->total = 0;
-	head = NULL;
-	read_dir(ls, &head, dirname);
-	ft_printf("%s:\ntotal %d\n", dirname, (*ls)->total / 2);
-	// ft_printf("max width: %zu total %zu count %d\n", (*ls)->width, (*ls)->total, (*ls)->objs);
-	(*ls)->flags & LLIST ? objiter(head, ls, print_obj_long) : objiter(head, ls, print_obj_short);
-	ft_putchar('\n');
-	index = 1;
-	while ((next = lst_search(head, 0, index)))
-	{
-		ft_putendl(next);
-		index++;
-		recurse_dirs(ls, next);
-		free(next);
-	}
-	// ft_printf("%s\n", (next));
-	objiter(head, ls, object_del);
-}
-
 void			ft_ls(t_ls **ls)
 {
 	t_obj	*head;
 
-	head = NULL;
-	read_dir(ls, &head, (*ls)->dirname);
-	objiter(head, ls, print_obj_long);
-	objiter(head, ls, print_obj_short);
-	recurse_dirs(ls, (*ls)->dirname);
+	if ((*ls)->flags & RECURSE)
+		recurse_dirs(ls, (*ls)->dirname);
+	else
+	{
+		head = NULL;
+		(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, (*ls)->dirname) : read_dir(ls, &head, (*ls)->dirname);
+		(*ls)->flags & RSORT ? PASS : merge_sort(&head);
+		if ((*ls)->flags & LLIST)
+		{
+			ft_printf("total %d\n", (*ls)->total / 2);
+			objiter(&head, ls, print_obj_long);
+		}
+		else
+		{
+			objiter(&head, ls, print_obj_short);
+			ft_putchar('\n');
+		}
+		objiter(&head, ls, object_del);
+	}
+	(*ls)->width = 0;
+	(*ls)->total = 0;
+	(*ls)->objs = 0;
 }
 
 // void			ft_ls(t_ls **ls)
