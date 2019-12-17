@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:59:36 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:21:24 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void		object_del(t_obj **head, t_ls **ls)
 		ft_strdel(&obj->name);
 		ft_strdel(&obj->rights);
 		ft_strdel(&obj->st_uid);
+		ft_strdel(&obj->st_gid);
 		ft_strdel(&obj->dt);
 		free(obj);
 		obj = NULL;
@@ -57,6 +58,7 @@ t_obj			*new_obj(char *dirname, char *filename)
 	obj->rights = permissions((int)attr.st_mode);
 	obj->st_nlink = attr.st_nlink;
 	obj->st_uid = ft_strdup(getpwuid(attr.st_uid)->pw_name);
+	obj->st_gid = ft_strdup(getgrgid(attr.st_gid)->gr_name);
 	obj->st_size = attr.st_size;
 	obj->dt = ft_strdup(&(ctime(&attr.st_mtime)[4]));
 	obj->st_time = attr.st_mtime;

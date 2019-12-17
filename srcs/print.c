@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:59:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 16:02:55 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:09:41 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/*
-** 		Get right padding based on current shell size
-*/
-
-static int		get_padding(t_ls **ls, int ws_col)
-{
-	struct winsize	w;
-	int				width;
-
-	width = (*ls)->width;
-	ioctl(1, TIOCGSIZE, &w);
-	if (width < 16 && (*ls)->objs * 16 < ws_col)
-		return (16);
-	else if ((*ls)->width < 24)
-		return (24);
-	else
-		return(width + 6);	
-}
 
 /*
 **		Print ls -l format
@@ -39,51 +20,60 @@ void			print_obj_long(t_obj **head, t_ls **ls)
 {
 	t_obj			*obj;
 
+	// ft_printf("%lu <> %lu\n", (unsigned long)time(NULL) - SIXMON, obj->st_time);
 	obj = *head;
-	ft_printf("%-10s %d %-7s %.4s %6zu %.12s %s\n", 
-		obj->rights,
-		obj->st_nlink, // check length!!
-		obj->st_uid,
-		&obj->dt[16],
-		obj->st_size,
-		obj->dt,
-		obj->name
-	);
+	if ((unsigned long)time(NULL) - SIXMON < obj->st_time)
+		ft_printf("%s %*d %-*s %-*s %*zu %.12s ", 
+			obj->rights,
+			(*ls)->w_links + 1, obj->st_nlink,
+			(*ls)->w_uid + 1, obj->st_uid,
+			(*ls)->w_gid + 1, obj->st_gid,
+			(*ls)->w_size, obj->st_size,
+			obj->dt
+		);
+	else
+		ft_printf("%s %*d %-*s %.4s %*zu %.12s ", 
+			obj->rights,
+			(*ls)->w_links + 1, obj->st_nlink,
+			(*ls)->w_uid + 1, obj->st_uid,
+			&obj->dt[16],
+			(*ls)->w_size, obj->st_size,
+			obj->dt
+		);
+	if (obj->rights[0] == 'd')
+		ft_putstr("\033[0;34m");
+	ft_printf("%s\n", obj->name);
+	if (obj->rights[0] == 'd')
+		ft_putstr("\033[0m");
 }
-
-/*
-**		Print with columnar format
-**		Reset cursor \033[l;cH 
-**		Up n lines \033[nA
-**		forward n characters \033[nC
-**		Store cursor \033[s Move back to it \033[u
-*/
 
 void			print_obj_short(t_obj **head, t_ls **ls)
 {
-	struct winsize	w;
-	static int		i;
-	int				cols;
-	int				rows;
-	int				padding;
 	t_obj			*obj;
 
 	obj = *head;
-	ioctl(1, TIOCGSIZE, &w);
-	padding = get_padding(ls, w.ws_col);
-	cols = w.ws_col / (*ls)->width + 2;
-	rows = cols / (*ls)->objs;
-	i++;
 	if (obj->rights[0] == 'd')
-		ft_putstr("\033[01;32m");
-	// ft_putstr("\033[10A");
-	// ft_printf("%d", padding);
-	ft_printf("%-*s", (*ls)->width + 2, obj->name); // HERE IS THE PROBLEM!! CHECK COLUMNAR FORMAT
+		ft_putstr("\033[0;34m");
+	ft_printf("%-*s", (*ls)->width + 7, obj->name);
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[0m");
-	if (cols == i)
+}
+
+void			print_obj_cols(t_obj **head, t_ls **ls)
+{
+	static int		i;
+	t_obj			*obj;
+
+	obj = *head;
+	if (obj->rights[0] == 'd')
+		ft_putstr("\033[0;34m");
+	ft_printf("%-*s", (*ls)->width + 7, obj->name);
+	i++;
+	if (i == (*ls)->cols)
 	{
 		ft_putchar('\n');
 		i = 0;
 	}
+	if (obj->rights[0] == 'd')
+		ft_putstr("\033[0m");
 }

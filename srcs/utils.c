@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 11:16:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:38:28 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+** 		Check if columnar format needed
+*/
+
+void			columns(t_ls **ls)
+{
+	struct winsize	w;
+
+	ioctl(1, TIOCGSIZE, &w);
+	if (((*ls)->width + 7) * (*ls)->objs < w.ws_col)
+		(*ls)->cols = 0;
+	else
+		(*ls)->cols = w.ws_col / ((*ls)->width + 7);
+}
 
 /*
 **		Join directory and file into a path

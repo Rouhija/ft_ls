@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:50:10 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:07:23 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,16 @@
 # include <string.h>
 # include <pwd.h>
 # include <grp.h>
-// # include <uuid/uuid.h>
+# include <uuid/uuid.h>
 # include <time.h>
 # include <sys/ioctl.h>
 
 /*
 ** -------- MACROS --------
 */
+
+# define OPTIONS "Ralrt"
+# define SIXMON 15778476
 
 # define LLIST		(1 << 0)
 # define RECURSE	(1 << 1)
@@ -41,15 +44,13 @@
 # define TSORT		(1 << 4)
 # define NUL		(1 >> 1)
 
-/*
-** -------- TYPEDEFS --------
-*/
-
-# define OPTIONS "Ralrt"
-
 # ifndef TIOCGSIZE
 #  define TIOCGSIZE TIOCGWINSZ
 # endif
+
+/*
+** -------- TYPEDEFS --------
+*/
 
 typedef struct		s_obj
 {
@@ -59,6 +60,7 @@ typedef struct		s_obj
 	char			*rights;
 	nlink_t			st_nlink;
 	char			*st_uid;
+	char			*st_gid;
 	off_t			st_size;
 	char			*dt;
 	time_t			st_time;
@@ -80,6 +82,11 @@ typedef struct		s_ls
 	short			flags;
 	char			*dirname;
 	int				objs;
+	int				cols;
+	int				w_uid;
+	int				w_gid;
+	int				w_size;
+	int				w_links;
 }					t_ls;
 
 /*
@@ -117,5 +124,7 @@ void	objiter(t_obj **lst, t_ls **ls, void (*applyf)(t_obj **, t_ls **));
 char    *lst_search(t_obj *lst, int i, int index);
 void			recurse_dirs(t_ls **ls, char *dirname);
 void			merge_sort(t_obj **headref, t_ls **ls);
+void			columns(t_ls **ls);
+void			print_obj_cols(t_obj **head, t_ls **ls);
 
 #endif

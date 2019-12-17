@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:29:34 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:56:49 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:52:19 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,16 @@ void			ft_ls(t_ls **ls)
 	{
 		head = NULL;
 		(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, (*ls)->dirname) : read_dir(ls, &head, (*ls)->dirname);
-		(*ls)->flags & RSORT ? PASS : merge_sort(&head, ls);
+		merge_sort(&head, ls);
 		if ((*ls)->flags & LLIST)
 		{
-			ft_printf("total %d\n", (*ls)->total / 2);
+			ft_printf("total %d\n", (*ls)->total);
 			objiter(&head, ls, print_obj_long);
 		}
 		else
 		{
-			objiter(&head, ls, print_obj_short);
+			columns(ls);
+			(*ls)->cols ? objiter(&head, ls, print_obj_cols) : objiter(&head, ls, print_obj_short);
 			ft_putchar('\n');
 		}
 		objiter(&head, ls, object_del);

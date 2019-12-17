@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 12:36:24 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:07:14 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,11 @@ static t_ls		*init(char **av)
 	ls->width = 0;
 	ls->total = 0;
 	ls->objs = 0;
+	ls->cols = 0;
+	ls->w_uid = 0;
+	ls->w_gid = 0;
+	ls->w_size = 0;
+	ls->w_links = 0;
 	return (ls);
 }
 

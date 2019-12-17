@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recurse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:28:51 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:55:25 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 18:52:26 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ void			recurse_dirs(t_ls **ls, char *dirname)
 	(*ls)->total = 0;
 	head = NULL;
 	(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, dirname) : read_dir(ls, &head, dirname);
-	(*ls)->flags & RSORT ? PASS : merge_sort(&head, ls);
+	merge_sort(&head, ls);
 	ft_printf("%s:\ntotal %d\n", dirname, (*ls)->total / 2);
-	(*ls)->flags & LLIST ? objiter(&head, ls, print_obj_long) : objiter(&head, ls, print_obj_short);
+	if ((*ls)->flags & LLIST)
+		objiter(&head, ls, print_obj_long);
+	else
+	{
+		columns(ls);
+		(*ls)->cols ? objiter(&head, ls, print_obj_cols) : objiter(&head, ls, print_obj_short);
+	}
 	ft_putchar('\n');
 	index = 1;
 	while ((next = lst_search(head, 0, index)))
