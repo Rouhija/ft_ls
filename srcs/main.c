@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 19:07:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:20:57 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ static t_ls		*init(char **av)
 	ls->w_gid = 0;
 	ls->w_size = 0;
 	ls->w_links = 0;
+	ls->dirs = 0;
 	return (ls);
 }
 
@@ -89,6 +90,7 @@ int				main(int ac, char **av)
 		i++;
 	if (av[i])
 	{
+		ls->dirs = av[i + 1] ? 1 : 0;
 		while (av[i])
 		{
 			ls->dirname = ft_strdup(av[i]);

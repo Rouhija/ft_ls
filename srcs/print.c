@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:59:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 19:09:41 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:27:36 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,18 @@ void			print_obj_long(t_obj **head, t_ls **ls)
 	// ft_printf("%lu <> %lu\n", (unsigned long)time(NULL) - SIXMON, obj->st_time);
 	obj = *head;
 	if ((unsigned long)time(NULL) - SIXMON < obj->st_time)
-		ft_printf("%s %*d %-*s %-*s %*zu %.12s ", 
+		ft_printf("%s  %*d %-*s %-*s %*zu %.12s ", 
 			obj->rights,
-			(*ls)->w_links + 1, obj->st_nlink,
+			(*ls)->w_links, obj->st_nlink,
 			(*ls)->w_uid + 1, obj->st_uid,
 			(*ls)->w_gid + 1, obj->st_gid,
 			(*ls)->w_size, obj->st_size,
 			obj->dt
 		);
 	else
-		ft_printf("%s %*d %-*s %.4s %*zu %.12s ", 
+		ft_printf("%s  %*d %-*s %.4s %*zu %.12s ", 
 			obj->rights,
-			(*ls)->w_links + 1, obj->st_nlink,
+			(*ls)->w_links, obj->st_nlink,
 			(*ls)->w_uid + 1, obj->st_uid,
 			&obj->dt[16],
 			(*ls)->w_size, obj->st_size,

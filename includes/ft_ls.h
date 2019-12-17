@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 19:07:23 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:20:11 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ typedef struct		s_ls
 	int				w_gid;
 	int				w_size;
 	int				w_links;
+	int				dirs;
 }					t_ls;
 
 /*

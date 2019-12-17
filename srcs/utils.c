@@ -6,14 +6,14 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 18:38:28 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:14:51 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
 
 /*
-** 		Check if columnar format needed
+** 		Check for columnar formatting
 */
 
 void			columns(t_ls **ls)
@@ -34,11 +34,16 @@ void			columns(t_ls **ls)
 char			*pathjoin(char *dirname, char *filename)
 {
 	char	*path;
+	char	*tmp;
 
 	if (dirname[ft_strlen(dirname) - 1] == '/')
 		path = ft_strjoin(dirname, filename);
 	else
-		path = ft_strjoin(ft_strjoin(dirname, "/"), filename);
+	{
+		tmp = ft_strjoin(dirname, "/");
+		path = ft_strjoin(tmp, filename);
+		free(tmp);
+	}
 	return (path);
 }
 

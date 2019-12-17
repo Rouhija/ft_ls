@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:04:33 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 19:07:02 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 19:15:38 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@ void			read_dir_a(t_ls **ls, t_obj **head, char *dirname)
 		(*ls)->total += obj->st_blocks;
 		(*ls)->width = ft_strlen(obj->name) > (*ls)->width ?
 						ft_strlen(obj->name) : (*ls)->width;
+		(*ls)->w_links = ft_count_digits(obj->st_nlink, 10) > (*ls)->w_links ?
+						ft_count_digits(obj->st_nlink, 10) : (*ls)->w_links;
+		(*ls)->w_uid = ft_strlen(obj->st_uid) > (*ls)->w_uid ?
+						ft_strlen(obj->st_uid) : (*ls)->w_uid;
+		(*ls)->w_gid = ft_strlen(obj->st_gid) > (*ls)->w_gid ?
+						ft_strlen(obj->st_gid) : (*ls)->w_gid;
+		(*ls)->w_size = ft_count_digits(obj->st_size, 10) > (*ls)->w_size ?
+						ft_count_digits(obj->st_size, 10) : (*ls)->w_size;
 	}
 	closedir(dir);
 }
