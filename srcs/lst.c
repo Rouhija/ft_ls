@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 12:56:20 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:34:50 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:58:55 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,10 @@ char    *lst_search(t_obj *lst, int i, int index)
 	{
 		while (lst)
 		{
-			if (lst->rights[0] == 'd' && ft_strcmp(lst->name, ".") && ft_strcmp(lst->name, ".."))
+			if (lst->rights[0] == 'd' && ft_strcmp(lst->name, ".")
+									&& ft_strcmp(lst->name, ".."))
             {
                 i++;
-                // ft_printf("current %d, index %d\n", i, index);
                 if (i == index)
                     return (ft_strdup(lst->path));           
             }

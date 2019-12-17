@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:30:10 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:50:10 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,6 @@ void	addlst(t_obj **alst, t_obj *new);
 void	objiter(t_obj **lst, t_ls **ls, void (*applyf)(t_obj **, t_ls **));
 char    *lst_search(t_obj *lst, int i, int index);
 void			recurse_dirs(t_ls **ls, char *dirname);
-void			merge_sort(t_obj **headref);
+void			merge_sort(t_obj **headref, t_ls **ls);
 
 #endif

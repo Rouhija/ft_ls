@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:28:51 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 14:30:53 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 14:55:25 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void			recurse_dirs(t_ls **ls, char *dirname)
 	(*ls)->width = 0;
 	(*ls)->total = 0;
 	head = NULL;
-	(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, (*ls)->dirname) : read_dir(ls, &head, (*ls)->dirname);
-	(*ls)->flags & RSORT ? PASS : merge_sort(&head);
+	(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, dirname) : read_dir(ls, &head, dirname);
+	(*ls)->flags & RSORT ? PASS : merge_sort(&head, ls);
 	ft_printf("%s:\ntotal %d\n", dirname, (*ls)->total / 2);
 	(*ls)->flags & LLIST ? objiter(&head, ls, print_obj_long) : objiter(&head, ls, print_obj_short);
 	ft_putchar('\n');

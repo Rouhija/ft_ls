@@ -22,7 +22,8 @@ FILES 	=	main.c \
 			directory.c \
 			lst.c \
 			sort.c \
-			recurse.c
+			recurse.c \
+			print.c
 
 SRCS 	=	$(addprefix srcs/, $(FILES))
 OBJS 	=	$(FILES:.c=.o)
