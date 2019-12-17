@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:59:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 15:03:09 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 16:02:55 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void			print_obj_long(t_obj **head, t_ls **ls)
 
 /*
 **		Print with columnar format
+**		Reset cursor \033[l;cH 
+**		Up n lines \033[nA
+**		forward n characters \033[nC
+**		Store cursor \033[s Move back to it \033[u
 */
 
 void			print_obj_short(t_obj **head, t_ls **ls)
@@ -72,6 +76,7 @@ void			print_obj_short(t_obj **head, t_ls **ls)
 	i++;
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[01;32m");
+	// ft_putstr("\033[10A");
 	// ft_printf("%d", padding);
 	ft_printf("%-*s", (*ls)->width + 2, obj->name); // HERE IS THE PROBLEM!! CHECK COLUMNAR FORMAT
 	if (obj->rights[0] == 'd')
