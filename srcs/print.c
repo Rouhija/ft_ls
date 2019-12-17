@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:59:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 19:27:36 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 20:44:56 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void			print_obj_long(t_obj **head, t_ls **ls)
 {
 	t_obj			*obj;
 
-	// ft_printf("%lu <> %lu\n", (unsigned long)time(NULL) - SIXMON, obj->st_time);
 	obj = *head;
 	if ((unsigned long)time(NULL) - SIXMON < obj->st_time)
 		ft_printf("%s  %*d %-*s %-*s %*zu %.12s ", 
@@ -42,7 +41,10 @@ void			print_obj_long(t_obj **head, t_ls **ls)
 		);
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[0;34m");
-	ft_printf("%s\n", obj->name);
+	if (obj->rights[0] == 'l')
+		ft_printf("%s\n", obj->link);
+	else
+		ft_printf("%s\n", obj->name);
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[0m");
 }

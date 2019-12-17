@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 19:20:11 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 20:44:21 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct		s_obj
 	mode_t			st_mode;
 	char			*path;
 	char			*name;
+	char			*link;
 	char			*rights;
 	nlink_t			st_nlink;
 	char			*st_uid;
@@ -77,8 +78,8 @@ typedef struct		s_btree
 
 typedef struct		s_ls
 {
-	size_t			width;
-	size_t			total;
+	int				width;
+	int				total;
 	short			flags;
 	char			*dirname;
 	int				objs;
@@ -127,5 +128,6 @@ void			recurse_dirs(t_ls **ls, char *dirname);
 void			merge_sort(t_obj **headref, t_ls **ls);
 void			columns(t_ls **ls);
 void			print_obj_cols(t_obj **head, t_ls **ls);
+char			*permissions_link(int st_mode);
 
 #endif

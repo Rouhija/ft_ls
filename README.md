@@ -5,3 +5,5 @@ There are various non-printing escape characters that can perform tasks such as 
 printf("\033[s\033[0;0H\033[K\033[u");
 
 https://www.geeksforgeeks.org/merge-sort-for-linked-list/
+
+../../Applications/Spotify.app/Contents/Frameworks/Spotify Helper (Renderer).app/Contents/MacOS

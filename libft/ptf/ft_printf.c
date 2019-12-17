@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/02 12:58:13 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/13 22:24:20 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/17 20:43:26 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void				fill_buffer(t_ptf **p)
 		if ((*p)->buf_index == BUF_SIZE || (*p)->buf[(*p)->buf_index] == '\n')
 			flush_buffer(p);
 	}
-	ft_bzero((void *)(*p)->tmp, ft_strlen((const char *)(*p)->tmp));
-	ft_strdel(&(*p)->tmp);
+	free((*p)->tmp);
+	(*p)->tmp = NULL;
 	(*p)->width = 0;
 	(*p)->flags = 0;
 	(*p)->prec = 0;
