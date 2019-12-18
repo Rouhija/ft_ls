@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:59:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 12:18:23 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:20:07 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,18 +63,17 @@ void			print_obj_short(t_obj **head, t_ls **ls)
 
 void			print_obj_cols(t_obj **head, t_ls **ls)
 {
-	static int		i;
 	t_obj			*obj;
 
 	obj = *head;
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[0;34m");
 	ft_printf("%-*s", (*ls)->width + 7, obj->name);
-	i++;
-	if (i == (*ls)->cols)
+	(*ls)->index++;
+	if ((*ls)->index == (*ls)->cols)
 	{
 		ft_putchar('\n');
-		i = 0;
+		(*ls)->index = 0;
 	}
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[0m");

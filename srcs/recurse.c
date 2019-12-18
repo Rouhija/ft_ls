@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:28:51 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:11:47 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:22:17 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ void			recurse_dirs(t_ls **ls, char *dirname)
 	t_obj					*head;
 	int						index;
 
-	(*ls)->width = 0;
-	(*ls)->total = 0;
-	(*ls)->w_uid = 0;
-	(*ls)->w_gid = 0;
-	(*ls)->w_size = 0;
-	(*ls)->w_links = 0;
+	reset_dir(ls);
 	head = NULL;
 	(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, dirname) : read_dir(ls, &head, dirname);
 	merge_sort(&head, ls);

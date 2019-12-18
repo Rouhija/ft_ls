@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 10:36:50 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:27:48 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 
 # define OPTIONS "Ralrt"
 # define SIXMON 15778476
+# define LNKBUF 1024
 
 # define LLIST		(1 << 0)
 # define RECURSE	(1 << 1)
@@ -89,6 +90,7 @@ typedef struct		s_ls
 	int				w_size;
 	int				w_links;
 	int				dirs;
+	int				index;
 }					t_ls;
 
 /*
@@ -108,16 +110,7 @@ char				*permissions(int st_mode);
 char				*datestring(char *dt);
 
 void				print_lst(t_list *lst);
-DIR					*open_dir(char *dir);
 
-t_btree				*btree_new(t_obj **item);
-char				*btree_search_dir(t_btree *root, int i, int j);
-void 				btree_del(t_btree *node);
-void				btree_insert(t_btree **root, t_obj **item);
-void				btree_insert_rev(t_btree **root, t_obj **item);
-void				btree_insert_time(t_btree **root, t_obj **item);
-void				btree_apply_infix(t_btree *root, t_ls **ls, void (*applyf)(t_obj *, t_ls **));
-void				btree_apply_infix_rev(t_btree *root, t_ls **ls, void (*applyf)(t_obj *, t_ls **));
 
 void			read_dir(t_ls **ls, t_obj **head, char *dirname);
 void			read_dir_a(t_ls **ls, t_obj **head, char *dirname);
@@ -129,5 +122,6 @@ void			merge_sort(t_obj **headref, t_ls **ls);
 void			columns(t_ls **ls);
 void			print_obj_cols(t_obj **head, t_ls **ls);
 char			*permissions_link(int st_mode);
+void			reset_dir(t_ls **ls);
 
 #endif

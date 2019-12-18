@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 20:12:27 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:21:51 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+void			reset_dir(t_ls **ls)
+{
+	(*ls)->width = 0;
+	(*ls)->total = 0;
+	(*ls)->objs = 0;
+	(*ls)->w_uid = 0;
+	(*ls)->w_gid = 0;
+	(*ls)->w_size = 0;
+	(*ls)->w_links = 0;
+	(*ls)->index = 0;	
+}
 
 /*
 ** 		Check for columnar formatting

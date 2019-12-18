@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:29:34 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 20:22:06 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:22:32 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,5 @@ void			ft_ls(t_ls **ls)
 		}
 		objiter(&head, ls, object_del);
 	}
-	(*ls)->width = 0;
-	(*ls)->total = 0;
-	(*ls)->objs = 0;
-	(*ls)->w_uid = 0;
-	(*ls)->w_gid = 0;
-	(*ls)->w_size = 0;
-	(*ls)->w_links = 0;
+	reset_dir(ls);
 }

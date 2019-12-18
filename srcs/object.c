@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 20:18:44 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:27:11 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,7 @@ void		object_del(t_obj **head, t_ls **ls)
 		obj = NULL;
 	}
 	if (ls && *ls)
-	{
-		(*ls)->width = 0;
-		(*ls)->total = 0;
-		(*ls)->objs = 0;
-		(*ls)->w_uid = 0;
-		(*ls)->w_gid = 0;
-		(*ls)->w_size = 0;
-		(*ls)->w_links = 0;	
-	}
+		reset_dir(ls);
 }
 
 /*
@@ -54,14 +46,14 @@ t_obj			*new_symlink(char *path, char *filename)
 {
 	t_obj			*obj;
 	struct stat 	attr;
-	char			buf[1024];
+	char			buf[LNKBUF];
 	char 			*tmp;
 
 	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
 		exit_program(2);
 	lstat(path, &attr);
-	readlink(path, buf, 4);
-	buf[4] = '\0';
+	ft_bzero(buf, LNKBUF);
+	readlink(path, buf, LNKBUF);
 	tmp = ft_strjoin(filename, " -> ");
 	obj->link = ft_strjoin(tmp, buf);
 	free(tmp);
