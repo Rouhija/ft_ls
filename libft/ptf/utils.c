@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:20:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/05 15:35:53 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 12:07:02 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	hex_prefix(t_ptf **p)
 
 	i = 0;
 	(*p)->tmplen += 2;
-	r = ft_memalloc(sizeof(char) * (*p)->tmplen);
+	if (!(r = ft_memalloc(sizeof(char) * (*p)->tmplen)))
+		return ;
 	r[0] = '0';
 	r[1] = 'x';
 	while (i < (int)(*p)->tmplen)
@@ -27,7 +28,8 @@ void	hex_prefix(t_ptf **p)
 		r[i + 2] = (*p)->tmp[i];
 		i++;
 	}
-	free((*p)->tmp);
+	if ((*p)->tmp)
+		free((*p)->tmp);
 	(*p)->tmp = ft_memdup(r, (*p)->tmplen);
 	free(r);
 }

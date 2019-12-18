@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   recurse.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:28:51 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 20:57:16 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:11:47 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void			recurse_dirs(t_ls **ls, char *dirname)
 	index = 1;
 	while ((next = lst_search(head, 0, index)))
 	{
-		ft_putendl(next);
 		index++;
 		recurse_dirs(ls, next);
 		free(next);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   padding.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 18:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/05 18:02:09 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:10:02 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,41 @@
 void		padding_leading(t_ptf **p)
 {
 	int		i;
-	int		j;
 	char	*r;
 
-	j = 0;
 	i = (*p)->width - (*p)->tmplen;
 	if (i > 0)
 	{
-		r = ft_memalloc(sizeof(char) * (*p)->width);
+		if (!(r = ft_strnew((*p)->width)))
+			return ;
 		r = ft_memset(r, (*p)->padc, i);
-		while (i < (int)(*p)->width)
-			r[i++] = (*p)->tmp[j++];
+		ft_memcpy(r + 1, (*p)->tmp, (*p)->tmplen);
 		(*p)->tmplen = (*p)->width;
 		free((*p)->tmp);
-		(*p)->tmp = ft_memdup(r, (*p)->width);
+		(*p)->tmp = NULL;
+		(*p)->tmp = ft_strdup(r);
 		free(r);
+		r = NULL;
 	}
 }
 
 void		padding_trailing(t_ptf **p)
 {
 	int		i;
-	int		j;
 	char	*r;
 
-	j = 0;
 	i = (*p)->width - (*p)->tmplen;
 	if (i > 0)
 	{
-		r = ft_memalloc(sizeof(char) * (*p)->width);
+		if (!(r = ft_strnew((*p)->width)))
+			return ;
 		r = ft_memset(r, (*p)->padc, (*p)->width);
-		while (j < (int)(*p)->tmplen)
-		{
-			r[j] = (*p)->tmp[j];
-			j++;
-		}
+		ft_memcpy(r, (*p)->tmp, (*p)->tmplen);
 		(*p)->tmplen = (*p)->width;
 		free((*p)->tmp);
-		(*p)->tmp = ft_memdup(r, (*p)->width);
+		(*p)->tmp = NULL;
+		(*p)->tmp = ft_strdup(r);
 		free(r);
+		r = NULL;
 	}
 }

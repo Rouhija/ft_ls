@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:04:33 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 20:56:20 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 13:11:12 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,7 @@ void			read_dir(t_ls **ls, t_obj **head, char *dirname)
 	DIR						*dir;
 
 	if (!(dir = opendir(dirname)))
-	{	
-		ft_putendl("\033[01;31m");
-		ft_putstr("ERROR");
-		ft_printf("%s\n", dirname);
-		ft_putendl("\033[0;39m: ");
 		exit_program(1);
-	}
 	while ((dp = readdir(dir)))
 	{
 		if ((*dp).d_name[0] == '.')
