@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:29:34 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 14:36:49 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:36:45 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void			ft_ls(t_ls **ls)
 		recurse_dirs(ls, (*ls)->dirname);
 	else
 	{
-		(*ls)->dirs ? ft_printf("%s:\n", (*ls)->dirname) : PASS;
+		(*ls)->ac > 1 ? ft_printf("%s:\n", (*ls)->dirname) : PASS;
 		head = NULL;
 		(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, (*ls)->dirname) : read_dir(ls, &head, (*ls)->dirname);
 		merge_sort(&head, ls);

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 14:59:20 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 15:37:05 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ static t_ls		*init(char **av)
 	ls->w_gid = 0;
 	ls->w_size = 0;
 	ls->w_links = 0;
-	ls->dirs = 0;
+	ls->dirs = 0; /* maybe not needed */
 	ls->index = 0;
 	return (ls);
 }
@@ -131,16 +131,14 @@ int				main(int ac, char **av)
 	i = 0;
 	ls = init(av);
 	parse_arguments(av, &ls);
-	// while (ls->args[i])
-	// {
-	// 	ft_putendl(ls->args[i]);
-	// 	i++;
-	// }
+	/* Sort arguments based on flags */
 	while (ls->args[i])
 	{
 		ls->dirname = ls->args[i];
 		ft_ls(&ls);
 		i++;
+		if (i < ls->ac)
+			ft_putchar('\n');
 	}
 	// while (av[i] && av[i][0] == '-')
 	// 	i++;
@@ -162,7 +160,7 @@ int				main(int ac, char **av)
 	// 	ft_strdel(&ls->dirname);
 	// }
 	free(ls);
-	// if (ac > 4)
-	// 	while(1);
+	if (ac > 6)
+		while(1);
 	return (0);
 }
