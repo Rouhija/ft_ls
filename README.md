@@ -6,6 +6,5 @@ printf("\033[s\033[0;0H\033[K\033[u");
 
 https://www.geeksforgeeks.org/merge-sort-for-linked-list/
 
-SORT ARGUMENTS with flags
-SORT -r
-SORT -t
+SORT -t and r together
+sort arguments using new_obj and same linker list sorters!
