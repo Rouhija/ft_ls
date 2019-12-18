@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/04 18:10:26 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:10:02 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:20:43 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void		padding_leading(t_ptf **p)
 		if (!(r = ft_strnew((*p)->width)))
 			return ;
 		r = ft_memset(r, (*p)->padc, i);
-		ft_memcpy(r + 1, (*p)->tmp, (*p)->tmplen);
+		ft_memcpy(r + i, (*p)->tmp, (*p)->tmplen);
 		(*p)->tmplen = (*p)->width;
 		free((*p)->tmp);
 		(*p)->tmp = NULL;

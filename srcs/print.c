@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 14:59:17 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:20:07 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:35:14 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void			print_obj_long(t_obj **head, t_ls **ls)
 			obj->dt
 		);
 	if (obj->rights[0] == 'd')
-		ft_putstr("\033[0;34m");
+		ft_putstr("\033[0;32m");
 	if (obj->rights[0] == 'l')
 		ft_printf("%s\n", obj->link);
 	else
@@ -55,7 +55,7 @@ void			print_obj_short(t_obj **head, t_ls **ls)
 
 	obj = *head;
 	if (obj->rights[0] == 'd')
-		ft_putstr("\033[0;34m");
+		ft_putstr("\033[0;32m");
 	ft_printf("%-*s", (*ls)->width + 7, obj->name);
 	if (obj->rights[0] == 'd')
 		ft_putstr("\033[0m");
@@ -67,7 +67,7 @@ void			print_obj_cols(t_obj **head, t_ls **ls)
 
 	obj = *head;
 	if (obj->rights[0] == 'd')
-		ft_putstr("\033[0;34m");
+		ft_putstr("\033[0;32m");
 	ft_printf("%-*s", (*ls)->width + 7, obj->name);
 	(*ls)->index++;
 	if ((*ls)->index == (*ls)->cols)

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:19:23 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:59:20 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void			exit_program(int reason)
 }
 
 /*
-** 		Parse options to struct and move pointer of argv
+** 		Parse options
 */
 
 static short	parse_options(char **av)
@@ -57,6 +57,47 @@ static short	parse_options(char **av)
 }
 
 /*
+** 		Parse arguments
+*/
+
+static void		parse_arguments(char **av, t_ls **ls)
+{
+	int	i;
+	int j;
+	int k;
+
+	i = 1;
+	j = 0;
+	k = 0;
+	while (av[i] && av[i][0] == '-')
+		i++;
+	while (av[i])
+	{
+		i++;
+		j++;	
+	}
+	i -= j;
+	(*ls)->ac = j;
+	if (!j)
+	{
+		if (!((*ls)->args = (char **)malloc(sizeof(char *) * 2)))
+			exit_program(2);
+		(*ls)->args[0] = ft_strdup(".");
+		(*ls)->args[1] = NULL;
+		return ;
+	}
+	if (!((*ls)->args = (char **)malloc(sizeof(char *) * (j + 1))))
+		exit_program(2);
+	while (av[i])
+	{
+		(*ls)->args[k] = ft_strdup(av[i]);
+		i++;
+		k++;	
+	}
+	(*ls)->args[k] = NULL;
+}
+
+/*
 ** 		Init struct for ls command information
 */
 
@@ -67,6 +108,8 @@ static t_ls		*init(char **av)
 	if (!(ls = (t_ls *)malloc(sizeof(t_ls))))
 		exit_program(2);
 	ls->flags = parse_options(av);
+	ls->args = NULL;
+	ls->ac = 0;
 	ls->width = 0;
 	ls->total = 0;
 	ls->objs = 0;
@@ -85,29 +128,41 @@ int				main(int ac, char **av)
 	t_ls	*ls;
 	int		i;
 
-	i = 1;
+	i = 0;
 	ls = init(av);
-	while (av[i] && av[i][0] == '-')
-		i++;
-	if (av[i])
+	parse_arguments(av, &ls);
+	// while (ls->args[i])
+	// {
+	// 	ft_putendl(ls->args[i]);
+	// 	i++;
+	// }
+	while (ls->args[i])
 	{
-		ls->dirs = av[i + 1] ? 1 : 0;
-		while (av[i])
-		{
-			ls->dirname = ft_strdup(av[i]);
-			ft_ls(&ls);
-			ft_strdel(&ls->dirname);
-			i++;
-		}
-	}
-	else
-	{
-		ls->dirname = ft_strdup(".");
+		ls->dirname = ls->args[i];
 		ft_ls(&ls);
-		ft_strdel(&ls->dirname);
+		i++;
 	}
+	// while (av[i] && av[i][0] == '-')
+	// 	i++;
+	// if (av[i])
+	// {
+	// 	ls->dirs = av[i + 1] ? 1 : 0;
+	// 	while (av[i])
+	// 	{
+	// 		ls->dirname = ft_strdup(av[i]);
+	// 		ft_ls(&ls);
+	// 		ft_strdel(&ls->dirname);
+	// 		i++;
+	// 	}
+	// }
+	// else
+	// {
+	// 	ls->dirname = ft_strdup(".");
+	// 	ft_ls(&ls);
+	// 	ft_strdel(&ls->dirname);
+	// }
 	free(ls);
-	if (ac > 4)
-		while(1);
+	// if (ac > 4)
+	// 	while(1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:27:48 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 14:55:23 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct		s_ls
 	int				width;
 	int				total;
 	short			flags;
+	char			**args;
+	int				ac;
 	char			*dirname;
 	int				objs;
 	int				cols;
