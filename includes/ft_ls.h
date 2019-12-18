@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 20:39:15 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 20:51:28 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,13 +70,6 @@ typedef struct		s_obj
 	struct s_obj	*next;
 }					t_obj;
 
-typedef struct		s_btree
-{
-	struct s_btree	*left;
-	struct s_btree	*right;
-	t_obj			*item;
-}					t_btree;
-
 typedef struct		s_ls
 {
 	int				width;
@@ -91,7 +84,6 @@ typedef struct		s_ls
 	int				w_gid;
 	int				w_size;
 	int				w_links;
-	int				dirs;
 	int				index;
 }					t_ls;
 
@@ -104,7 +96,6 @@ void				print_obj_long(t_obj **head, t_ls **ls);
 void				print_obj_short(t_obj **head, t_ls **ls);
 void				exit_program(int reason);
 void				ft_ls(t_ls **ls);
-void				read_dir_rev(t_ls **ls, t_btree **btree, char *dirname);
 t_obj				*new_obj(char *name, char *path);
 char				*pathjoin(char *dirname, char *filename);
 char				*permissions(int st_mode);

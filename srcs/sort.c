@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:44:09 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/17 18:56:08 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 21:02:42 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,12 @@ static t_obj   *sorted_merge_rev(t_obj *a, t_obj *b)
     if (ft_strcmp(b->name, a->name) < 0)
     {
         r = a; 
-        r->next = sorted_merge(a->next, b); 
+        r->next = sorted_merge_rev(a->next, b); 
     }
     else
     { 
         r = b; 
-        r->next = sorted_merge(a, b->next); 
+        r->next = sorted_merge_rev(a, b->next); 
     }
     return (r); 
 }
@@ -114,7 +114,7 @@ void merge_sort(t_obj **headref, t_ls **ls)
     if ((*ls)->flags & TSORT)
         *headref = sorted_merge_time(a, b);
     else if ((*ls)->flags & RSORT)
-        *headref = sorted_merge_time(a, b);
+        *headref = sorted_merge_rev(a, b);
     else
         *headref = sorted_merge(a, b); 
 }

@@ -6,7 +6,6 @@ printf("\033[s\033[0;0H\033[K\033[u");
 
 https://www.geeksforgeeks.org/merge-sort-for-linked-list/
 
-SORT ARGUMENTS
+SORT ARGUMENTS with flags
 SORT -r
 SORT -t
-NEWLINES

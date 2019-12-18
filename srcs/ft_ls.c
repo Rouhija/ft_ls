@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:29:34 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 15:36:45 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 20:43:56 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void			ft_ls(t_ls **ls)
 		merge_sort(&head, ls);
 		if ((*ls)->flags & LLIST)
 		{
-			ft_printf("total %d\n", (*ls)->total);
+			ft_printf("total %d\n", (*ls)->total / 2);
 			objiter(&head, ls, print_obj_long);
 		}
 		else

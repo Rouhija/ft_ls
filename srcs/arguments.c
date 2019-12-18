@@ -6,11 +6,15 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:33:12 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 20:39:08 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 20:49:59 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+**		Sort argv folders passed as arguments
+*/
 
 void		sort_arguments(t_ls **ls)
 {
@@ -36,7 +40,6 @@ void		sort_arguments(t_ls **ls)
 		j++;
 	}
 }
-
 
 /*
 ** 		Parse options
