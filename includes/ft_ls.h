@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_ls.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 14:55:23 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/18 20:39:15 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,5 +125,8 @@ void			columns(t_ls **ls);
 void			print_obj_cols(t_obj **head, t_ls **ls);
 char			*permissions_link(int st_mode);
 void			reset_dir(t_ls **ls);
+void		parse_arguments(char **av, t_ls **ls);
+short		parse_options(char **av);
+void		sort_arguments(t_ls **ls);
 
 #endif
