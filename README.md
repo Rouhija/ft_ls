@@ -1,9 +1,6 @@
-# Description
-Hive Helsinki fl_ls project
+### ft_ls
+Recoded ls function in C
 
-### Flags
-- -t
-- -r
-- -R
-- -a
-- -l
+### Description
+handles following flags
+- -Ralrt
