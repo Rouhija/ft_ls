@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:43:44 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 14:04:16 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,17 @@ void			columns(t_ls **ls)
 
 	ioctl(1, TIOCGSIZE, &w);
 	if (((*ls)->width + 7) * (*ls)->objs < w.ws_col)
+	{
 		(*ls)->cols = 0;
+		return ;
+	}
+	else if ((*ls)->width < 16)
+		(*ls)->width = 16;
+	else if ((*ls)->width < 24)
+		(*ls)->width = 24;
 	else
-		(*ls)->cols = w.ws_col / ((*ls)->width + 7);
+		(*ls)->width += 1;
+	(*ls)->cols = w.ws_col / ((*ls)->width);
 }
 
 /*
