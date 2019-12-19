@@ -6,13 +6,13 @@
 #    By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/15 16:29:02 by srouhe            #+#    #+#              #
-#    Updated: 2019/12/13 14:54:30 by srouhe           ###   ########.fr        #
+#    Updated: 2019/12/19 10:29:34 by srouhe           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	libft.a
 HDRS	=	includes/
-C 		=	gcc
+C 		=	clang
 
 FILES	=	ft_atoi.c ft_bzero.c ft_count_digits.c ft_count_leading.c ft_count_trailing.c \
 		    ft_isalnum.c ft_isalpha.c ft_isascii.c ft_isdigit.c ft_isprint.c  ft_iswhitespace.c \

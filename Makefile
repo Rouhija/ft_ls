@@ -12,7 +12,7 @@
 # **************************************************************************** #
 
 NAME 	= 	ft_ls
-C		= 	gcc
+C		= 	clang
 FLAGS 	=  
 
 FILES 	=	main.c \
@@ -22,6 +22,7 @@ FILES 	=	main.c \
 			directory.c \
 			lst.c \
 			sort.c \
+			sort_util.c \
 			recurse.c \
 			print.c \
 			arguments.c

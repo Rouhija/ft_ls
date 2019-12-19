@@ -8,3 +8,5 @@ https://www.geeksforgeeks.org/merge-sort-for-linked-list/
 
 SORT -t and r together
 sort arguments using new_obj and same linker list sorters!
+
+Check with error flags finally

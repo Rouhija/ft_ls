@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:44:09 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 21:02:42 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 10:27:32 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ void merge_sort(t_obj **headref, t_ls **ls)
     front_back_split(head, &a, &b); 
     merge_sort(&a, ls); 
     merge_sort(&b, ls);
-    if ((*ls)->flags & TSORT)
+    if ((*ls)->flags & TSORT && (*ls)->flags & RSORT)
+        *headref = sorted_merge_time_rev(a, b);
+    else if ((*ls)->flags & TSORT)
         *headref = sorted_merge_time(a, b);
     else if ((*ls)->flags & RSORT)
         *headref = sorted_merge_rev(a, b);
