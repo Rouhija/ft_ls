@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 14:09:14 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 14:14:10 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void			columns(t_ls **ls)
 	struct winsize	w;
 
 	ioctl(1, TIOCGSIZE, &w);
-	if ((*ls)->width < 16)
+	if ((*ls)->width < 8)
+		(*ls)->width = 8;
+	else if ((*ls)->width < 16)
 		(*ls)->width = 16;
 	else if ((*ls)->width < 24)
 		(*ls)->width = 24;
