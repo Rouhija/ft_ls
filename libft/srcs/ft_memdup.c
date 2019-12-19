@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/18 14:11:15 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/05 15:30:55 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:07:33 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,6 @@ void			*ft_memdup(void const *src, size_t n)
 	p2 = (unsigned char *)r;
 	while (*p1 && n-- > 0)
 		*p2++ = *p1++;
-	*p2 = '\0';	
+	*p2 = '\0';
 	return (r);
 }

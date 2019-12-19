@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 11:21:29 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:32:05 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,23 @@ void			exit_program(int reason)
 	reason == 0 ? ft_putendl("usage: ./ft_ls [-Ralrt] [file ...]") : PASS;
 	reason == 1 ? ft_putendl("opendir fail") : PASS;
 	reason == 2 ? ft_putendl("malloc fail.") : PASS;
+	if (reason > 2)
+	{
+		ft_putendl("other error.");
+		reason = 1;
+	}
 	exit(reason);
+}
+
+/*
+**		Handle invalid paths
+*/
+
+void			invalid_path(char *path)
+{
+	ft_putstr("./ft_ls: ");
+	ft_putstr(path);
+	ft_putendl(": No such file or directory");
 }
 
 /*
@@ -50,24 +66,18 @@ static t_ls		*init(char **av)
 	return (ls);
 }
 
-int				main(int ac, char **av)
+static	void	iterate_args(t_ls **ls, t_obj *args)
 {
-	t_ls	*ls;
-	t_obj	*args;
 	t_obj	*tmp;
 	int		i;
 
 	i = 0;
-	ls = init(av);
-	args = NULL;
-	parse_arguments(av, &args, &ls);
-	merge_sort(&args, &ls);
 	while (args)
 	{
 		if (S_ISDIR(args->st_mode))
 		{
-			ls->dirname = args->path;
-			ft_ls(&ls);
+			(*ls)->dirname = args->path;
+			ft_ls(ls);
 		}
 		else
 			ft_putendl(args->path);
@@ -75,11 +85,21 @@ int				main(int ac, char **av)
 		args = args->next;
 		minidel(tmp);
 		i++;
-		if (i < ls->ac)
+		if (i < (*ls)->ac)
 			ft_putchar('\n');
 	}
+}
+
+int				main(int ac, char **av)
+{
+	t_ls	*ls;
+	t_obj	*args;
+
+	ls = init(av);
+	args = NULL;
+	parse_arguments(av, ac, &args, &ls);
+	merge_sort(&args, &ls);
+	iterate_args(&ls, args);
 	free(ls);
-	if (ac > 6)
-		while(1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:33:12 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 10:56:36 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:15:36 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ short		parse_options(char **av)
 
 	i = 1;
 	j = 0;
+	flags = 0;
 	while (av[i] && av[i][0] == '-')
 	{
 		j = 0;
@@ -46,24 +47,16 @@ short		parse_options(char **av)
 ** 		Parse arguments
 */
 
-void		parse_arguments(char **av, t_obj **head, t_ls **ls)
+void		parse_arguments(char **av, int ac, t_obj **head, t_ls **ls)
 {
 	int		i;
-	int 	j;
 	t_obj	*obj;
 
 	i = 1;
-	j = 0;
 	while (av[i] && av[i][0] == '-')
 		i++;
-	while (av[i])
-	{
-		i++;
-		j++;	
-	}
-	i -= j;
-	(*ls)->ac = j;
-	if (!j)
+	(*ls)->ac = ac - i;
+	if (!(*ls)->ac)
 	{
 		obj = new_mini_obj(ft_strdup("."));
 		addlst(head, obj);
@@ -71,7 +64,10 @@ void		parse_arguments(char **av, t_obj **head, t_ls **ls)
 	while (av[i])
 	{
 		obj = new_mini_obj(ft_strdup(av[i]));
-		addlst(head, obj);
+		if (obj)
+			addlst(head, obj);
+		else
+			(*ls)->ac--;
 		i++;
 	}
 }

@@ -13,7 +13,7 @@
 
 NAME 	= 	ft_ls
 C		= 	clang
-FLAGS 	=  
+FLAGS 	=  -Wall -Wextra -Werror
 
 FILES 	=	main.c \
 			ft_ls.c \

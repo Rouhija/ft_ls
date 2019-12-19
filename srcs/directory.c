@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   directory.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:04:33 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:11:12 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:21:22 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,7 @@ void			read_dir(t_ls **ls, t_obj **head, char *dirname)
 	t_obj					*obj;
 	DIR						*dir;
 
-	if (!(dir = opendir(dirname)))
-		exit_program(1);
+	!(dir = opendir(dirname)) ? exit_program(1) : PASS;
 	while ((dp = readdir(dir)))
 	{
 		if ((*dp).d_name[0] == '.')
@@ -36,10 +35,10 @@ void			read_dir(t_ls **ls, t_obj **head, char *dirname)
 						(int)ft_strlen(obj->name) : (*ls)->width;
 		(*ls)->w_links = ft_count_digits(obj->st_nlink, 10) > (*ls)->w_links ?
 						ft_count_digits(obj->st_nlink, 10) : (*ls)->w_links;
-		(*ls)->w_uid = ft_strlen(obj->st_uid) > (*ls)->w_uid ?
-						ft_strlen(obj->st_uid) : (*ls)->w_uid;
-		(*ls)->w_gid = ft_strlen(obj->st_gid) > (*ls)->w_gid ?
-						ft_strlen(obj->st_gid) : (*ls)->w_gid;
+		(*ls)->w_uid = (int)ft_strlen(obj->st_uid) > (*ls)->w_uid ?
+						(int)ft_strlen(obj->st_uid) : (*ls)->w_uid;
+		(*ls)->w_gid = (int)ft_strlen(obj->st_gid) > (*ls)->w_gid ?
+						(int)ft_strlen(obj->st_gid) : (*ls)->w_gid;
 		(*ls)->w_size = ft_count_digits(obj->st_size, 10) > (*ls)->w_size ?
 						ft_count_digits(obj->st_size, 10) : (*ls)->w_size;
 	}
@@ -64,14 +63,14 @@ void			read_dir_a(t_ls **ls, t_obj **head, char *dirname)
 		addlst(head, obj);
 		(*ls)->objs++;
 		(*ls)->total += obj->st_blocks;
-		(*ls)->width = ft_strlen(obj->name) > (*ls)->width ?
-						ft_strlen(obj->name) : (*ls)->width;
+		(*ls)->width = (int)ft_strlen(obj->name) > (*ls)->width ?
+						(int)ft_strlen(obj->name) : (*ls)->width;
 		(*ls)->w_links = ft_count_digits(obj->st_nlink, 10) > (*ls)->w_links ?
 						ft_count_digits(obj->st_nlink, 10) : (*ls)->w_links;
-		(*ls)->w_uid = ft_strlen(obj->st_uid) > (*ls)->w_uid ?
-						ft_strlen(obj->st_uid) : (*ls)->w_uid;
-		(*ls)->w_gid = ft_strlen(obj->st_gid) > (*ls)->w_gid ?
-						ft_strlen(obj->st_gid) : (*ls)->w_gid;
+		(*ls)->w_uid = (int)ft_strlen(obj->st_uid) > (*ls)->w_uid ?
+						(int)ft_strlen(obj->st_uid) : (*ls)->w_uid;
+		(*ls)->w_gid = (int)ft_strlen(obj->st_gid) > (*ls)->w_gid ?
+						(int)ft_strlen(obj->st_gid) : (*ls)->w_gid;
 		(*ls)->w_size = ft_count_digits(obj->st_size, 10) > (*ls)->w_size ?
 						ft_count_digits(obj->st_size, 10) : (*ls)->w_size;
 	}
