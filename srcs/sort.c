@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:44:09 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:42:45 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:48:54 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static t_obj	*sorted_merge_time(t_obj *a, t_obj *b)
 	else if (b == NULL)
 		return (a);
 	if ((a->st_time > b->st_time) ||
-		((a->st_time == b->st_time) && (ft_strcmp(a->name, b->name) > 0)))
+		((a->st_time == b->st_time) && (ft_strcmp(b->name, a->name) > 0)))
 	{
 		r = a;
 		r->next = sorted_merge_time(a->next, b);
