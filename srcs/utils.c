@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 14:14:10 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 14:18:38 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,10 @@ void			columns(t_ls **ls)
 		(*ls)->width = 16;
 	else if ((*ls)->width < 24)
 		(*ls)->width = 24;
+	else if ((*ls)->width < 32)
+		(*ls)->width = 32;
+	else if ((*ls)->width < 40)
+		(*ls)->width = 40;
 	else
 		(*ls)->width += 1;
 	(*ls)->cols = w.ws_col / ((*ls)->width);
