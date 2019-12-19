@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:29:34 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:26:04 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:30:08 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,16 @@ static void		list_dir(t_ls **ls)
 {
 	t_obj	*head;
 
-	(*ls)->ac > 0 ? ft_printf("%s:\n", (*ls)->dirname) : PASS;
 	head = NULL;
 	(*ls)->flags & HIDDEN ? read_dir_a(ls, &head, (*ls)->dirname)
 	: read_dir(ls, &head, (*ls)->dirname);
+	(*ls)->ac > 0 ? ft_printf("%s:\n", (*ls)->dirname) : PASS;
+	if ((*ls)->objs == 0)
+		return ;
 	merge_sort(&head, ls);
 	if ((*ls)->flags & LLIST)
 	{
-		(*ls)->objs ? ft_printf("total %d\n", (*ls)->total) : PASS;
+		ft_printf("total %d\n", (*ls)->total);
 		objiter(&head, ls, print_obj_long);
 	}
 	else

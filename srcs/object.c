@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 13:13:02 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:14:46 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ t_obj		*new_mini_obj(char *path)
 		exit_program(2);
 	if (stat(path, &attr) != 0)
 	{
-		errors(path, path, 1);
+		errors(path, 1);
 		return (NULL);
 	}
 	obj->name = path;

@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 13:11:52 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:36:22 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,7 @@ void			errors(char *path, int code)
 		ft_putendl(": No such file or directory");
 	}
 	else if (code == 2)
-	{
-		ft_putstr("./ft_ls: ");
-		ft_putstr(path);
-		ft_putendl(": Permission denied");
-	}
+		ft_putstr("./ft_ls: Permission denied: ");
 }
 
 /*
