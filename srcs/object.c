@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: srouhe <srouhe@student.42.fr>              +#+  +:+       +#+        */
+/*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 13:27:11 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 11:18:25 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,42 @@ t_obj			*new_obj(char *dirname, char *filename)
 	obj->dt = ft_strdup(&(ctime(&attr.st_mtime)[4]));
 	obj->st_time = attr.st_mtime;
 	obj->st_blocks = attr.st_blocks;
+	obj->next = NULL;
+	return (obj);
+}
+
+/*
+**		Delete arg objects
+*/
+
+void			minidel(t_obj *obj)
+{
+	if (obj)
+	{
+		ft_strdel(&obj->path);
+		free(obj);
+		obj = NULL;
+	}	
+}
+
+/*
+** 		Create new arg object 
+*/
+
+t_obj			*new_mini_obj(char *path)
+{
+	t_obj			*obj;
+	struct stat 	attr;
+	struct stat 	links;
+
+	lstat(path, &links);
+	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
+		exit_program(2);
+	stat(path, &attr);
+	obj->name = path;
+	obj->path = path;
+	obj->st_mode = attr.st_mode;
+	obj->st_time = attr.st_mtime;
 	obj->next = NULL;
 	return (obj);
 }

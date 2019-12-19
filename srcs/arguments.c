@@ -6,40 +6,11 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 20:33:12 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 20:49:59 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 10:56:36 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
-
-/*
-**		Sort argv folders passed as arguments
-*/
-
-void		sort_arguments(t_ls **ls)
-{
-	int		i;
-	int		j;
-	char	*tmp;
-
-	i = 0;
-	j = 0;
-	while (j < (*ls)->ac)
-	{
-		i = 0;
-		while (i < (*ls)->ac - 1)
-		{
-			if (ft_strcmp((*ls)->args[i], (*ls)->args[i + 1]) > 0)
-			{
-				tmp = (*ls)->args[i];
-				(*ls)->args[i] = (*ls)->args[i + 1];
-				(*ls)->args[i + 1] = tmp;
-			}
-			i++;
-		}
-		j++;
-	}
-}
 
 /*
 ** 		Parse options
@@ -75,15 +46,14 @@ short		parse_options(char **av)
 ** 		Parse arguments
 */
 
-void		parse_arguments(char **av, t_ls **ls)
+void		parse_arguments(char **av, t_obj **head, t_ls **ls)
 {
-	int	i;
-	int j;
-	int k;
+	int		i;
+	int 	j;
+	t_obj	*obj;
 
 	i = 1;
 	j = 0;
-	k = 0;
 	while (av[i] && av[i][0] == '-')
 		i++;
 	while (av[i])
@@ -95,19 +65,13 @@ void		parse_arguments(char **av, t_ls **ls)
 	(*ls)->ac = j;
 	if (!j)
 	{
-		if (!((*ls)->args = (char **)malloc(sizeof(char *) * 2)))
-			exit_program(2);
-		(*ls)->args[0] = ft_strdup(".");
-		(*ls)->args[1] = NULL;
-		return ;
+		obj = new_mini_obj(ft_strdup("."));
+		addlst(head, obj);
 	}
-	if (!((*ls)->args = (char **)malloc(sizeof(char *) * (j + 1))))
-		exit_program(2);
 	while (av[i])
 	{
-		(*ls)->args[k] = ft_strdup(av[i]);
+		obj = new_mini_obj(ft_strdup(av[i]));
+		addlst(head, obj);
 		i++;
-		k++;	
 	}
-	(*ls)->args[k] = NULL;
 }

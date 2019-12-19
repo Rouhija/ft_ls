@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/18 20:47:07 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 11:21:29 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ static t_ls		*init(char **av)
 	if (!(ls = (t_ls *)malloc(sizeof(t_ls))))
 		exit_program(2);
 	ls->flags = parse_options(av);
-	ls->args = NULL;
 	ls->ac = 0;
 	ls->width = 0;
 	ls->total = 0;
@@ -54,16 +53,27 @@ static t_ls		*init(char **av)
 int				main(int ac, char **av)
 {
 	t_ls	*ls;
+	t_obj	*args;
+	t_obj	*tmp;
 	int		i;
 
 	i = 0;
 	ls = init(av);
-	parse_arguments(av, &ls);
-	sort_arguments(&ls);
-	while (ls->args[i])
+	args = NULL;
+	parse_arguments(av, &args, &ls);
+	merge_sort(&args, &ls);
+	while (args)
 	{
-		ls->dirname = ls->args[i];
-		ft_ls(&ls);
+		if (S_ISDIR(args->st_mode))
+		{
+			ls->dirname = args->path;
+			ft_ls(&ls);
+		}
+		else
+			ft_putendl(args->path);
+		tmp = args;
+		args = args->next;
+		minidel(tmp);
 		i++;
 		if (i < ls->ac)
 			ft_putchar('\n');

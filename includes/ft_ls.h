@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 10:27:13 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 11:18:35 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ typedef struct		s_ls
 	int				width;
 	int				total;
 	short			flags;
-	char			**args;
 	int				ac;
 	char			*dirname;
 	int				objs;
@@ -116,9 +115,10 @@ void			columns(t_ls **ls);
 void			print_obj_cols(t_obj **head, t_ls **ls);
 char			*permissions_link(int st_mode);
 void			reset_dir(t_ls **ls);
-void		parse_arguments(char **av, t_ls **ls);
+void		parse_arguments(char **av, t_obj **head, t_ls **ls);
 short		parse_options(char **av);
-void		sort_arguments(t_ls **ls);
 t_obj   *sorted_merge_time_rev(t_obj *a, t_obj *b);
+t_obj			*new_mini_obj(char *path);
+void			minidel(t_obj *obj);
 
 #endif

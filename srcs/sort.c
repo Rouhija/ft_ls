@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/17 13:44:09 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 10:27:32 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 10:52:27 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ static t_obj   *sorted_merge_time(t_obj *a, t_obj *b)
     return (r); 
 } 
 
-void merge_sort(t_obj **headref, t_ls **ls)
+void            merge_sort(t_obj **headref, t_ls **ls)
 { 
     t_obj   *head;
     t_obj   *a; 
