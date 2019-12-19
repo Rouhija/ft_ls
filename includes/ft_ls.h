@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/05 16:58:46 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:14:06 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:12:04 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void				objiter(t_obj **lst, t_ls **ls,
 
 void				exit_program(int reason);
 void				ft_ls(t_ls **ls);
-void				invalid_path(char *path);
+void				errors(char *path, int code);
 void				columns(t_ls **ls);
 void				parse_arguments(char **av, int ac, t_obj **head, t_ls **ls);
 void				merge_sort(t_obj **headref, t_ls **ls);

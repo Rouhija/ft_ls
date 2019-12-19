@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/11 20:26:03 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:32:05 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:11:52 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@
 void			exit_program(int reason)
 {
 	reason == 0 ? ft_putendl("usage: ./ft_ls [-Ralrt] [file ...]") : PASS;
-	reason == 1 ? ft_putendl("opendir fail") : PASS;
+	reason == 1 ? ft_putendl("error") : PASS;
 	reason == 2 ? ft_putendl("malloc fail.") : PASS;
-	if (reason > 2)
-	{
-		ft_putendl("other error.");
-		reason = 1;
-	}
 	exit(reason);
 }
 
@@ -35,11 +30,20 @@ void			exit_program(int reason)
 **		Handle invalid paths
 */
 
-void			invalid_path(char *path)
+void			errors(char *path, int code)
 {
-	ft_putstr("./ft_ls: ");
-	ft_putstr(path);
-	ft_putendl(": No such file or directory");
+	if (code == 1)
+	{
+		ft_putstr("./ft_ls: ");
+		ft_putstr(path);
+		ft_putendl(": No such file or directory");
+	}
+	else if (code == 2)
+	{
+		ft_putstr("./ft_ls: ");
+		ft_putstr(path);
+		ft_putendl(": Permission denied");
+	}
 }
 
 /*

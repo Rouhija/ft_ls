@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 16:04:33 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:21:22 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:12:40 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void			read_dir(t_ls **ls, t_obj **head, char *dirname)
 	t_obj					*obj;
 	DIR						*dir;
 
-	!(dir = opendir(dirname)) ? exit_program(1) : PASS;
+	!(dir = opendir(dirname)) ? errors(dirname, 2) : PASS;
 	while ((dp = readdir(dir)))
 	{
 		if ((*dp).d_name[0] == '.')
@@ -55,8 +55,7 @@ void			read_dir_a(t_ls **ls, t_obj **head, char *dirname)
 	t_obj					*obj;
 	DIR						*dir;
 
-	if (!(dir = opendir(dirname)))
-		exit_program(1);
+	!(dir = opendir(dirname)) ? errors(dirname, 2) : PASS;
 	while ((dp = readdir(dir)))
 	{
 		obj = new_obj(dirname, (*dp).d_name);

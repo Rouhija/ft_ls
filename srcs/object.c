@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:36:09 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 13:13:02 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ t_obj		*new_obj(char *dirname, char *filename)
 	char			*path;
 
 	path = pathjoin(dirname, filename);
-	lstat(path, &links) != 0 ? invalid_path(path) : PASS;
+	lstat(path, &links) != 0 ? errors(path, 1) : PASS;
 	if (S_ISLNK(links.st_mode))
 		return (new_symlink(path, filename));
 	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
 		exit_program(2);
-	stat(path, &attr) != 0 ? invalid_path(path) : PASS;
+	stat(path, &attr) != 0 ? errors(path, 1) : PASS;
 	obj->path = path;
 	obj->st_mode = attr.st_mode;
 	obj->name = ft_strdup(filename);
@@ -131,7 +131,7 @@ t_obj		*new_mini_obj(char *path)
 		exit_program(2);
 	if (stat(path, &attr) != 0)
 	{
-		invalid_path(path);
+		errors(path, path, 1);
 		return (NULL);
 	}
 	obj->name = path;
