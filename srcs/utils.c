@@ -6,11 +6,15 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 15:47:10 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:43:05 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:43:44 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ls.h"
+
+/*
+** 		Reset dir values after iteration
+*/
 
 void			reset_dir(t_ls **ls)
 {
