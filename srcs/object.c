@@ -6,7 +6,7 @@
 /*   By: srouhe <srouhe@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 16:47:30 by srouhe            #+#    #+#             */
-/*   Updated: 2019/12/19 12:01:01 by srouhe           ###   ########.fr       */
+/*   Updated: 2019/12/19 12:36:09 by srouhe           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,17 @@ void		object_del(t_obj **head, t_ls **ls)
 }
 
 /*
-** 		Create new symlink object 
+**		Create new symlink object
 */
 
-t_obj			*new_symlink(char *path, char *filename)
+t_obj		*new_symlink(char *path, char *filename)
 {
 	t_obj			*obj;
-	struct stat 	attr;
+	struct stat		attr;
 	char			buf[LNKBUF];
-	char 			*tmp;
+	char			*tmp;
 
-	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
-		exit_program(2);
+	!(obj = (t_obj *)malloc(sizeof(t_obj))) ? exit_program(2) : PASS;
 	lstat(path, &attr);
 	ft_bzero(buf, LNKBUF);
 	readlink(path, buf, LNKBUF);
@@ -73,14 +72,14 @@ t_obj			*new_symlink(char *path, char *filename)
 }
 
 /*
-** 		Create new object 
+**		Create new object
 */
 
-t_obj			*new_obj(char *dirname, char *filename)
+t_obj		*new_obj(char *dirname, char *filename)
 {
 	t_obj			*obj;
-	struct stat 	attr;
-	struct stat 	links;
+	struct stat		attr;
+	struct stat		links;
 	char			*path;
 
 	path = pathjoin(dirname, filename);
@@ -109,24 +108,24 @@ t_obj			*new_obj(char *dirname, char *filename)
 **		Delete arg objects
 */
 
-void			minidel(t_obj *obj)
+void		minidel(t_obj *obj)
 {
 	if (obj)
 	{
 		ft_strdel(&obj->path);
 		free(obj);
 		obj = NULL;
-	}	
+	}
 }
 
 /*
-** 		Create new arg object 
+**		Create new arg object
 */
 
-t_obj			*new_mini_obj(char *path)
+t_obj		*new_mini_obj(char *path)
 {
 	t_obj			*obj;
-	struct stat 	attr;
+	struct stat		attr;
 
 	if (!(obj = (t_obj *)malloc(sizeof(t_obj))))
 		exit_program(2);
