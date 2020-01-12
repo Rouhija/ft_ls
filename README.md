@@ -1,6 +1,7 @@
-### ft_ls
-Recoded ls function in C
-
-### Description
-handles following flags
-- -Ralrt
+# Description
+Handles following flags:
+- R
+- a
+- l
+- r
+- t
